@@ -63,6 +63,51 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Readability pass: the original design used many micro text sizes. */
+.text-\[8px\] {
+  font-size: 0.625rem !important;
+  line-height: 0.875rem !important;
+}
+
+.text-\[9px\],
+.text-\[10px\],
+.text-\[10\.5px\] {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+
+.text-\[11px\],
+.text-xs {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.text-sm {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+
+/* Wider content rails so desktop pages do not feel overly boxed in. */
+.max-w-5xl {
+  max-width: 80rem !important;
+}
+
+.max-w-6xl {
+  max-width: 88rem !important;
+}
+
+.max-w-7xl {
+  max-width: 92rem !important;
+}
+
+.max-w-3xl {
+  max-width: 56rem !important;
+}
+
+.max-w-2xl {
+  max-width: 48rem !important;
+}
+
 /* Elegant scrollbar styling */
 ::-webkit-scrollbar {
   width: 10px;

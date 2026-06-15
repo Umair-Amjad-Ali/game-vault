@@ -4,9 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, Gem, ChevronDown, Gamepad2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/Button";
-import { GAME_PLATFORMS, CONTACT_INFO } from "@/lib/constants";
+import { CONTACT_INFO } from "@/lib/constants";
+import { useApiData } from "@/components/providers/ApiDataProvider";
 
 export const Navbar: React.FC = () => {
+  const { games } = useApiData();
   const [isOpen, setIsOpen] = useState(false);
   const [isGamesOpen, setIsGamesOpen] = useState(false);
   const [isMegaOpen, setIsMegaOpen] = useState(false);
@@ -63,10 +65,10 @@ export const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-gradient-pink leading-none">
-                SDC
+                USA
               </span>
               <span className="text-[9px] text-gray-500 uppercase tracking-widest font-semibold mt-0.5">
-                Sweepstakes
+                Gaming Distributor
               </span>
             </div>
           </Link>
@@ -86,7 +88,7 @@ export const Navbar: React.FC = () => {
                 onClick={() => setIsMegaOpen(!isMegaOpen)}
                 className="mega-menu-trigger text-xs font-bold uppercase tracking-wider text-gray-650 hover:text-pink-600 transition-all duration-300 flex items-center gap-1 cursor-pointer"
               >
-                <span>Game Platforms</span>
+                <span>Gaming Platforms</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-300 ${isMegaOpen ? "rotate-180" : ""}`}
                 />
@@ -104,9 +106,7 @@ export const Navbar: React.FC = () => {
                 <div className="flex items-center justify-between pb-3 mb-4 border-b border-pink-100">
                   <div className="flex items-center gap-1.5 text-pink-650 font-black text-xs uppercase tracking-wider">
                     <Gamepad2 className="w-4 h-4 text-pink-650" />
-                    <span>
-                      Select Game Platform ({GAME_PLATFORMS.length} Platforms)
-                    </span>
+                    <span>Select Game Platform ({games.length} Platforms)</span>
                   </div>
                   <Link
                     href="/#game-platforms"
@@ -119,7 +119,7 @@ export const Navbar: React.FC = () => {
 
                 {/* 4-Column Grid displaying all 31 Games */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-2 max-h-[380px] overflow-y-auto pr-1">
-                  {GAME_PLATFORMS.map((game) => (
+                  {games.map((game) => (
                     <Link
                       key={game.id}
                       href={`/game/${game.id}`}
@@ -209,7 +209,7 @@ export const Navbar: React.FC = () => {
 
             {isGamesOpen && (
               <div className="mt-2 pl-3 ml-3 border-l-2 border-pink-200 flex flex-col gap-2.5 max-h-56 overflow-y-auto py-2">
-                {GAME_PLATFORMS.map((game) => (
+                {games.map((game) => (
                   <Link
                     key={game.id}
                     href={`/game/${game.id}`}

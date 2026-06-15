@@ -140,7 +140,7 @@ export const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-10 pb-5">
           {/* Copyright and Legal block */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 relative z-20">
-            <p>© {currentYear} SDC Sweepstakes. All rights reserved.</p>
+            <p>© {currentYear} USA Gaming Distributor. All rights reserved.</p>
             <div className="flex gap-4 font-bold uppercase tracking-wider text-[9px] text-gray-450">
               <span>Official Distributor Portal</span>
               <span>•</span>

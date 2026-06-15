@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { Gamepad2, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { GAME_PLATFORMS } from "@/lib/constants";
+import { GamePlatform } from "@/lib/constants";
 import { MasonryGrid } from "../ui/image-testimonial-grid";
+import { useApiData } from "@/components/providers/ApiDataProvider";
 
 // Array of 31 unique, premium, high-resolution gaming-related Unsplash image URLs
 // Players can change these images later with their official branded banners
@@ -41,8 +42,13 @@ const UNSPLASH_IMAGES = [
   "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&auto=format&fit=crop&q=80", // 30: Blue Dragon
   "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80", // 31: Cash Vault
 ];
+type Props = {
+  games?: GamePlatform[];
+};
 
-export const GamesGrid: React.FC = () => {
+export const GamesGrid: React.FC<Props> = ({ games: gamesProp }) => {
+  const { games: contextGames } = useApiData();
+  const games = gamesProp ?? contextGames;
   const [columns, setColumns] = useState(3);
 
   // Hook to set columns responsively inside the masonry view
@@ -89,10 +95,10 @@ export const GamesGrid: React.FC = () => {
         {/* Dynamic Masonry Game Gallery Grid displaying all 31 Platforms */}
         <div className="w-full max-w-5xl mx-auto">
           <MasonryGrid columns={columns} gap={4}>
-            {GAME_PLATFORMS.map((game, index) => {
+            {games.map((game, index) => {
               // Assign a stable high-definition cover image from the Unsplash gallery list
               const coverImage =
-                UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length];
+                game.imageUrl || UNSPLASH_IMAGES[index % UNSPLASH_IMAGES.length];
 
               return (
                 <div
