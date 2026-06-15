@@ -38,10 +38,10 @@ export const Footer: React.FC = () => {
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="text-base font-black tracking-tight text-gradient-pink leading-none">
-                    SDC
+                    USA
                   </span>
                   <span className="text-[8px] text-gray-500 uppercase tracking-widest font-semibold mt-0.5">
-                    Sweepstakes
+                    Gaming Distributor
                   </span>
                 </div>
               </Link>
