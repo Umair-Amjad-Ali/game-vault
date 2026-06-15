@@ -1,6 +1,6 @@
 import type { GamePlatform, GameRate } from "@/lib/constants";
 
-export const baseUrl = "https://test.zoravu.com";
+export const baseUrl = "https://admin.usagamingdistributor.com";
 
 export interface ApiPointPackage {
   points: number;
@@ -60,7 +60,7 @@ const resolveBadge = (tags: string[] = []) => {
 };
 
 export const mapApiDataToPlatforms = (
-  games: ApiGame[] = []
+  games: ApiGame[] = [],
 ): GamePlatform[] => {
   return games.map((game) => {
     const tags = game.tags ?? [];
