@@ -9,6 +9,12 @@ export interface ContactInfo {
     value: string;
     url: string;
   };
+  signal: {
+    label: string;
+    value: string;
+    username: string;
+    url: string;
+  };
   email: {
     label: string;
     value: string;
@@ -60,18 +66,24 @@ export interface GamePlatform {
 export const CONTACT_INFO: ContactInfo = {
   whatsapp: {
     label: "WhatsApp",
-    value: "+1 470-638-5664",
-    url: "https://wa.me/14706385664",
+    value: "+1 347-690-3982",
+    url: "https://wa.me/13476903982",
   },
   telegram: {
     label: "Telegram",
-    value: "@RickySweepstakes",
-    url: "https://t.me/RickySweepstakes",
+    value: "@USAGamingDistributor",
+    url: "https://t.me/USAGamingDistributor",
+  },
+  signal: {
+    label: "Signal",
+    value: "+1 347-690-3982",
+    username: "USAGD.25",
+    url: "https://signal.me/#p/+13476903982",
   },
   email: {
     label: "Email",
-    value: "sweepstakesdistribution@gmail.com",
-    url: "mailto:sweepstakesdistribution@gmail.com",
+    value: "USAGamingDistributor@gmail.com",
+    url: "mailto:USAGamingDistributor@gmail.com",
   },
 };
 
@@ -109,9 +121,9 @@ export const mapApiGameToPlatform = (game: ApiGame): GamePlatform => {
 export const FEATURES: FeatureItem[] = [
   {
     id: "experience",
-    title: "Over 10 Years of Experience",
+    title: "4+ Years of Experience",
     description:
-      "Leveraging over 10 years of industry experience, we specialize as an efficient supplier in Game Vault game credits and a range of other casino software games to sweepstakes distributors. Our long-standing presence has established us as a trusted and reliable name in the gaming market, particularly in distributing Vblink, Juwa, Orion Stars, Fire Kirin, Milky Ways, and more.",
+      "Leveraging over 4 years of dedicated industry experience, we specialize as an efficient supplier in Game Vault game credits and a range of other casino software games to sweepstakes distributors. Our focused presence has established us as a trusted and reliable name in the gaming market, particularly in distributing Vblink, Juwa, Orion Stars, Fire Kirin, Milky Ways, and more.",
     iconName: "Award",
   },
   {

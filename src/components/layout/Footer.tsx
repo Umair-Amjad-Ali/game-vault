@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Mail, MessageCircle, Send, Gem } from "lucide-react";
+import { Mail, MessageCircle, Send, Gem, MessageSquare } from "lucide-react";
 import { CONTACT_INFO, NAVIGATION_LINKS } from "@/lib/constants";
 
 export const Footer: React.FC = () => {
@@ -21,8 +21,8 @@ export const Footer: React.FC = () => {
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-100/10 rounded-full blur-3xl pointer-events-none" />
 
       <footer className="relative">
-        {/* Main content wrapper - width increased to max-w-7xl to match the navbar spacing */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-10 pb-12">
+        {/* Main content wrapper - aligned to max-w-5xl */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-10 pb-12">
           {/* Main 3-Column Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 relative z-20">
             {/* Column 1: Brand presentation (4/12) */}
@@ -40,12 +40,12 @@ export const Footer: React.FC = () => {
                   <span className="text-base font-black tracking-tight text-gradient-pink leading-none">
                     USA
                   </span>
-                  <span className="text-[8px] text-gray-500 uppercase tracking-widest font-semibold mt-0.5">
+                  <span className="text-[8px] text-gray-550 uppercase tracking-widest font-semibold mt-0.5">
                     Gaming Distributor
                   </span>
                 </div>
               </Link>
-              <p className="text-xs sm:text-sm text-gray-500 mt-2 leading-relaxed text-left">
+              <p className="text-xs sm:text-sm text-gray-550 mt-2 leading-relaxed text-left">
                 Your official, premier sweepstakes distributor and credit
                 supplier. Powering distributors and sub-agents worldwide with
                 unbeatable rates and round-the-clock service.
@@ -76,13 +76,13 @@ export const Footer: React.FC = () => {
               <h4 className="text-xs font-black uppercase tracking-wider text-gray-900">
                 Direct Support Channels
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-0.5">
+              <div className="grid grid-cols-2 gap-3 mt-0.5">
                 {/* WhatsApp */}
                 <a
                   href={CONTACT_INFO.whatsapp.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 p-3 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-xs transition-all duration-300 relative group"
+                  className="flex items-center gap-2 p-2 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-xs transition-all duration-300 relative group"
                 >
                   {/* Unique L-shaped Crop Marks */}
                   <span className="border-zinc-800 absolute -left-px -top-px block size-2.5 border-l-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
@@ -90,14 +90,14 @@ export const Footer: React.FC = () => {
                   <span className="border-zinc-800 absolute -bottom-px -left-px block size-2.5 border-b-2 border-l-2 z-20 transition-colors group-hover:border-pink-500"></span>
                   <span className="border-zinc-800 absolute -bottom-px -right-px block size-2.5 border-b-2 border-r-2 z-20 transition-colors group-hover:border-pink-500"></span>
 
-                  <div className="w-8 h-8 rounded-none bg-green-500 flex items-center justify-center text-white shrink-0 shadow-sm shadow-green-500/10">
-                    <MessageCircle className="w-4 h-4 fill-white/10" />
+                  <div className="w-7 h-7 rounded-none bg-green-500 flex items-center justify-center text-white shrink-0 shadow-sm shadow-green-500/10">
+                    <MessageCircle className="w-3.5 h-3.5 fill-white/10" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wide">
+                    <span className="text-[8px] text-gray-400 font-bold uppercase tracking-wide">
                       WhatsApp
                     </span>
-                    <span className="text-xs text-gray-700 font-bold truncate group-hover:text-pink-650 transition-colors">
+                    <span className="text-[9.5px] text-gray-700 font-bold truncate group-hover:text-pink-650 transition-colors leading-tight">
                       {CONTACT_INFO.whatsapp.value}
                     </span>
                   </div>
@@ -108,7 +108,7 @@ export const Footer: React.FC = () => {
                   href={CONTACT_INFO.telegram.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 p-3 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-xs transition-all duration-300 relative group"
+                  className="flex items-center gap-2 p-2 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-xs transition-all duration-300 relative group"
                 >
                   {/* Unique L-shaped Crop Marks */}
                   <span className="border-zinc-800 absolute -left-px -top-px block size-2.5 border-l-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
@@ -116,15 +116,65 @@ export const Footer: React.FC = () => {
                   <span className="border-zinc-800 absolute -bottom-px -left-px block size-2.5 border-b-2 border-l-2 z-20 transition-colors group-hover:border-pink-500"></span>
                   <span className="border-zinc-800 absolute -bottom-px -right-px block size-2.5 border-b-2 border-r-2 z-20 transition-colors group-hover:border-pink-500"></span>
 
-                  <div className="w-8 h-8 rounded-none bg-sky-500 flex items-center justify-center text-white shrink-0 shadow-sm shadow-sky-500/10">
-                    <Send className="w-4 h-4 translate-x-[-0.5px] fill-white/10" />
+                  <div className="w-7 h-7 rounded-none bg-sky-500 flex items-center justify-center text-white shrink-0 shadow-sm shadow-sky-500/10">
+                    <Send className="w-3.5 h-3.5 translate-x-[-0.5px] fill-white/10" />
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wide">
+                    <span className="text-[8px] text-gray-400 font-bold uppercase tracking-wide">
                       Telegram
                     </span>
-                    <span className="text-xs text-gray-700 font-bold truncate group-hover:text-pink-650 transition-colors">
+                    <span className="text-[9.5px] text-gray-700 font-bold truncate group-hover:text-pink-650 transition-colors leading-tight">
                       {CONTACT_INFO.telegram.value}
+                    </span>
+                  </div>
+                </a>
+
+                {/* Signal */}
+                <a
+                  href={CONTACT_INFO.signal.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-2 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-xs transition-all duration-300 relative group"
+                >
+                  {/* Unique L-shaped Crop Marks */}
+                  <span className="border-zinc-800 absolute -left-px -top-px block size-2.5 border-l-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
+                  <span className="border-zinc-800 absolute -right-px -top-px block size-2.5 border-r-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
+                  <span className="border-zinc-800 absolute -bottom-px -left-px block size-2.5 border-b-2 border-l-2 z-20 transition-colors group-hover:border-pink-500"></span>
+                  <span className="border-zinc-800 absolute -bottom-px -right-px block size-2.5 border-b-2 border-r-2 z-20 transition-colors group-hover:border-pink-500"></span>
+
+                  <div className="w-7 h-7 rounded-none bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-sm shadow-blue-500/10">
+                    <MessageSquare className="w-3.5 h-3.5 fill-white/10" />
+                  </div>
+                  <div className="flex flex-col overflow-hidden">
+                    <span className="text-[8px] text-gray-400 font-bold uppercase tracking-wide">
+                      Signal
+                    </span>
+                    <span className="text-[9.5px] text-gray-700 font-bold truncate group-hover:text-pink-650 transition-colors leading-tight">
+                      {CONTACT_INFO.signal.username}
+                    </span>
+                  </div>
+                </a>
+
+                {/* Email */}
+                <a
+                  href={CONTACT_INFO.email.url}
+                  className="flex items-center gap-2 p-2 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-xs transition-all duration-300 relative group"
+                >
+                  {/* Unique L-shaped Crop Marks */}
+                  <span className="border-zinc-800 absolute -left-px -top-px block size-2.5 border-l-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
+                  <span className="border-zinc-800 absolute -right-px -top-px block size-2.5 border-r-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
+                  <span className="border-zinc-800 absolute -bottom-px -left-px block size-2.5 border-b-2 border-l-2 z-20 transition-colors group-hover:border-pink-500"></span>
+                  <span className="border-zinc-800 absolute -bottom-px -right-px block size-2.5 border-b-2 border-r-2 z-20 transition-colors group-hover:border-pink-500"></span>
+
+                  <div className="w-7 h-7 rounded-none bg-pink-500 flex items-center justify-center text-white shrink-0 shadow-sm shadow-pink-500/10">
+                    <Mail className="w-3.5 h-3.5 fill-white/10" />
+                  </div>
+                  <div className="flex flex-col overflow-hidden">
+                    <span className="text-[8px] text-gray-400 font-bold uppercase tracking-wide">
+                      Email
+                    </span>
+                    <span className="text-[9.5px] text-gray-700 font-bold truncate group-hover:text-pink-650 transition-colors leading-tight">
+                      {CONTACT_INFO.email.value}
                     </span>
                   </div>
                 </a>
@@ -137,7 +187,7 @@ export const Footer: React.FC = () => {
         <div className="relative w-full h-[2px] bg-linear-to-r from-transparent via-pink-500 to-transparent opacity-65 z-20" />
 
         {/* Copyright and Legal wrapper */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-10 pb-5">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-10 pb-5">
           {/* Copyright and Legal block */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 relative z-20">
             <p>© {currentYear} USA Gaming Distributor. All rights reserved.</p>

@@ -37,9 +37,9 @@ export const Features: React.FC = () => {
             <CardHeader className="pb-3 p-0">
               <CardHeading
                 icon={Award}
-                title="Over 10 Years of Industry Presence"
+                title="4+ Years of Industry Presence"
                 description="Proven Sweepstakes Supplier & Partner"
-                detail="Leveraging over a decade of gaming expertise to provide stable, authorized distributor connections for all major sweepstakes systems."
+                detail="Leveraging over 4 years of dedicated gaming expertise to provide stable, authorized distributor connections for all major sweepstakes systems."
               />
             </CardHeader>
 
@@ -48,7 +48,7 @@ export const Features: React.FC = () => {
               {/* Reduced aspect height from aspect-[76/59] to aspect-[76/45] */}
               <div className="aspect-76/45 p-6 flex flex-col justify-center items-center text-center relative z-10">
                 <div className="text-5xl font-black text-pink-600 drop-shadow-sm select-none tracking-tight animate-pulse-slow">
-                  10+
+                  4+
                 </div>
                 <div className="text-xs font-extrabold uppercase tracking-wider text-gray-700 mt-2">
                   Years of Trusted Excellence

@@ -11,6 +11,8 @@ import {
   Users,
   ArrowRight,
   ShieldCheck,
+  MessageSquare,
+  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CONTACT_INFO } from "@/lib/constants";
@@ -261,15 +263,15 @@ export default function BecomeDistributorPage() {
               </p>
             </div>
 
-            {/* Direct Contact Buttons Row */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+            {/* Direct Contact Buttons Row - 2x2 grid */}
+            <div className="grid grid-cols-2 gap-2 shrink-0 w-full sm:w-auto">
               <a
                 href={CONTACT_INFO.whatsapp.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs tracking-wider uppercase shadow-md shadow-emerald-500/10 cursor-pointer transition-all hover:scale-[1.02] active:scale-98"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[9.5px] tracking-wider uppercase shadow-md shadow-emerald-500/10 cursor-pointer transition-all hover:scale-[1.02] active:scale-98"
               >
-                <MessageCircle className="w-4 h-4 fill-white/10" />
+                <MessageCircle className="w-3 h-3 fill-white/10" />
                 <span>WhatsApp</span>
               </a>
 
@@ -277,10 +279,28 @@ export default function BecomeDistributorPage() {
                 href={CONTACT_INFO.telegram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-xs tracking-wider uppercase shadow-md shadow-sky-500/10 cursor-pointer transition-all hover:scale-[1.02] active:scale-98"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-[9.5px] tracking-wider uppercase shadow-md shadow-sky-500/10 cursor-pointer transition-all hover:scale-[1.02] active:scale-98"
               >
-                <Send className="w-4 h-4 translate-x-[-1px] fill-white/10" />
+                <Send className="w-3 h-3 translate-x-[-0.5px] fill-white/10" />
                 <span>Telegram</span>
+              </a>
+
+              <a
+                href={CONTACT_INFO.signal.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-[9.5px] tracking-wider uppercase shadow-md shadow-blue-500/10 cursor-pointer transition-all hover:scale-[1.02] active:scale-98"
+              >
+                <MessageSquare className="w-3 h-3 fill-white/10" />
+                <span>Signal</span>
+              </a>
+
+              <a
+                href={CONTACT_INFO.email.url}
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-extrabold text-[9.5px] tracking-wider uppercase shadow-md shadow-pink-500/10 cursor-pointer transition-all hover:scale-[1.02] active:scale-98"
+              >
+                <Mail className="w-3 h-3 fill-white/10" />
+                <span>Email</span>
               </a>
             </div>
           </div>

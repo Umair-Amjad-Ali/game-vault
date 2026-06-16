@@ -8,7 +8,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-pink-50/60 via-white to-white"
+      className="relative pt-28 pb-6 lg:pt-36 lg:pb-8 overflow-hidden bg-gradient-to-b from-pink-50/60 via-white to-white"
     >
       {/* Decorative background dot pattern */}
       <div className="absolute inset-0 bg-dot-pattern opacity-60 pointer-events-none" />
