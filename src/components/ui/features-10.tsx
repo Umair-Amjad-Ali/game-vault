@@ -93,18 +93,12 @@ export function Features() {
 
             <div className="flex justify-center gap-6 overflow-hidden">
               <CircularUI
-                label="Distributor Tier"
-                circles={[{ pattern: "border" }, { pattern: "border" }]}
-              />
-
-              <CircularUI
                 label="Sub-Distributor"
                 circles={[{ pattern: "none" }, { pattern: "primary" }]}
               />
-
               <CircularUI
-                label="Store Margin"
-                circles={[{ pattern: "blue" }, { pattern: "none" }]}
+                label="Distributor Tier"
+                circles={[{ pattern: "border" }, { pattern: "border" }]}
               />
             </div>
           </FeatureCard>

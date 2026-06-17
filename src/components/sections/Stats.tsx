@@ -19,7 +19,8 @@ const STATS_DATA: StatItem[] = [
     id: "experience",
     value: "4+",
     label: "Years of Experience",
-    description: "Delivering stable, authorized sweepstakes software & secure credit connections.",
+    description:
+      "Delivering stable, authorized sweepstakes software & secure credit connections.",
     icon: Award,
     color: "text-pink-650",
     glowColor: "bg-pink-500/10",
@@ -28,7 +29,8 @@ const STATS_DATA: StatItem[] = [
     id: "clients",
     value: "500+",
     label: "Trusted Clients",
-    description: "Empowering master agents, stores, and distributors across the country.",
+    description:
+      "Empowering master agents, Sub-Distributor  and distributors across the country.",
     icon: Users,
     color: "text-purple-600",
     glowColor: "bg-purple-500/10",
@@ -37,7 +39,8 @@ const STATS_DATA: StatItem[] = [
     id: "connections",
     value: "5+",
     label: "Global Connections",
-    description: "Direct APIs with major gaming developers to secure the best rates.",
+    description:
+      "Direct APIs with major gaming developers to secure the best rates.",
     icon: Globe,
     color: "text-rose-600",
     glowColor: "bg-rose-500/10",
@@ -96,7 +99,9 @@ export const Stats: React.FC = () => {
                 className="relative group p-5 rounded-2xl border border-pink-200/80 bg-linear-to-br from-white/95 to-pink-50/40 backdrop-blur-md shadow-md hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 hover:border-pink-350 transition-all duration-500 overflow-hidden flex flex-col justify-between min-h-[160px]"
               >
                 {/* Decorative glowing sphere inside the card on hover */}
-                <div className={`absolute -right-6 -bottom-6 w-24 h-24 rounded-full ${stat.glowColor} blur-xl group-hover:scale-175 transition-transform duration-700 pointer-events-none`} />
+                <div
+                  className={`absolute -right-6 -bottom-6 w-24 h-24 rounded-full ${stat.glowColor} blur-xl group-hover:scale-175 transition-transform duration-700 pointer-events-none`}
+                />
 
                 <div>
                   {/* Icon badge */}
@@ -106,9 +111,7 @@ export const Stats: React.FC = () => {
 
                   {/* Value */}
                   <div className="text-3xl lg:text-4xl font-extrabold tracking-tight select-none mb-1">
-                    <span className="text-gradient-pink">
-                      {stat.value}
-                    </span>
+                    <span className="text-gradient-pink">{stat.value}</span>
                   </div>
 
                   {/* Label */}

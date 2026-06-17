@@ -81,7 +81,7 @@ export const mapApiDataToPlatforms = (
       imageUrl: game.media || "/images/hero_sweepstakes.png",
       badge: resolveBadge(tags),
       category: tags[0] ? titleCase(tags[0]) : "Multi-game Platform",
-      levels: game.level ?? ["Player", "Store", "Distributor"],
+      levels: game.level ?? ["Player", "Sub-Distributor", "Distributor"],
       rates,
     };
   });

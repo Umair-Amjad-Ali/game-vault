@@ -28,7 +28,7 @@ export default function BecomeDistributorPage() {
     communication: "WhatsApp",
     phone: "",
     email: "",
-    tier: "Store",
+    tier: "Sub-Distributor",
     gameId: games[0]?.id || "",
     points: "",
     message: "",
@@ -49,7 +49,12 @@ export default function BecomeDistributorPage() {
       setFormData((prev) => ({
         ...prev,
         gameId: selectedGameId,
-        points: prev.points === "custom" ? "custom" : (newGame.rates[0] ? String(newGame.rates[0].id ?? 1) : ""),
+        points:
+          prev.points === "custom"
+            ? "custom"
+            : newGame.rates[0]
+              ? String(newGame.rates[0].id ?? 1)
+              : "",
       }));
     }
   }, [formData.gameId, games]);
@@ -68,7 +73,9 @@ export default function BecomeDistributorPage() {
     if (!rates || rates.length === 0) {
       return { price: 0, rateUsed: 0, matchedIndex: 0 };
     }
-    const sorted = [...rates].sort((a, b) => Number(a.points) - Number(b.points));
+    const sorted = [...rates].sort(
+      (a, b) => Number(a.points) - Number(b.points),
+    );
     let matchedRate = sorted[0];
     let matchedIndex = 0;
     for (let i = 1; i < sorted.length; i++) {
@@ -77,12 +84,14 @@ export default function BecomeDistributorPage() {
         matchedIndex = i;
       }
     }
-    const rateVal = matchedRate.amountPerPoint ?? (matchedRate.price / Number(matchedRate.points));
+    const rateVal =
+      matchedRate.amountPerPoint ??
+      matchedRate.price / Number(matchedRate.points);
     const calculatedPrice = enteredPoints * rateVal;
     return {
       price: calculatedPrice,
       rateUsed: rateVal,
-      matchedIndex
+      matchedIndex,
     };
   };
 
@@ -113,14 +122,21 @@ export default function BecomeDistributorPage() {
 
     if (isCustom) {
       const enteredPoints = Number(customPoints);
-      const { price, rateUsed, matchedIndex } = getCustomPriceDetails(enteredPoints, activeGame?.rates ?? []);
-      const matchedRate = (activeGame?.rates ?? []).sort((a, b) => Number(a.points) - Number(b.points))[matchedIndex];
-      pointId = matchedRate?.id ?? (matchedIndex + 1);
+      const { price, rateUsed, matchedIndex } = getCustomPriceDetails(
+        enteredPoints,
+        activeGame?.rates ?? [],
+      );
+      const matchedRate = (activeGame?.rates ?? []).sort(
+        (a, b) => Number(a.points) - Number(b.points),
+      )[matchedIndex];
+      pointId = matchedRate?.id ?? matchedIndex + 1;
       finalPoints = String(enteredPoints);
       finalAmount = price.toFixed(2);
     } else {
       pointId = Number(formData.points);
-      const rate = activeGame?.rates.find((r, index) => (r.id ?? index + 1) === pointId);
+      const rate = activeGame?.rates.find(
+        (r, index) => (r.id ?? index + 1) === pointId,
+      );
       if (rate) {
         finalPoints = String(rate.points);
         finalAmount = String(rate.price);
@@ -194,8 +210,8 @@ export default function BecomeDistributorPage() {
             games? If you're keen to start your own internet distributors games
             business, we're here to guide you through the process. We're seeking
             driven individuals to join our network of gaming professionals. We
-            offer opportunities for online store setups and distributors across
-            most U.S. states.
+            offer opportunities for online Sub-Distributor & Distributor setups
+            across most U.S. states.
           </p>
 
           <p className="text-xs sm:text-sm text-gray-800 mt-3 leading-relaxed font-black border-b border-gray-100 pb-4">
@@ -234,7 +250,7 @@ export default function BecomeDistributorPage() {
         {/* 2. New Distributor/Store Application Form Heading */}
         <div className="text-left w-full mt-12 border-t border-gray-100 pt-10">
           <h2 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
-            New Distributor/Store Application Form
+            New Distributor/Sub-Distributor Application Form
           </h2>
 
           <p className="text-xs sm:text-sm text-gray-700 mt-4 leading-relaxed font-semibold text-left">
@@ -346,8 +362,8 @@ export default function BecomeDistributorPage() {
                 </h3>
               </div>
               <p className="text-[10px] text-slate-400 font-semibold leading-normal mt-1 max-w-xs">
-                Receive the best distributor margin rates and set up your store
-                today.
+                Receive the best distributor and Sub-Distributor margin rates
+                and set up your store today.
               </p>
             </div>
           </div>
@@ -453,7 +469,7 @@ export default function BecomeDistributorPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-extrabold text-gray-800">
-                        Store or Distributer{" "}
+                        Sub Distributer and Distributer{" "}
                         <span className="text-pink-600">*</span>
                       </label>
                       <select
@@ -463,9 +479,8 @@ export default function BecomeDistributorPage() {
                         }
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:border-pink-500 focus:ring-4 focus:ring-pink-500/10 focus:bg-white transition-all cursor-pointer"
                       >
-                        <option value="Store">Store</option>
-                        <option value="Distributor">Distributor</option>
                         <option value="Sub-Distributor">Sub-Distributor</option>
+                        <option value="Distributor">Distributor</option>
                       </select>
                     </div>
 
@@ -531,7 +546,23 @@ export default function BecomeDistributorPage() {
                       />
                       {customPoints && Number(customPoints) > 0 && (
                         <div className="text-[11px] text-pink-600 font-extrabold mt-1">
-                          Calculated Cost: ${getCustomPriceDetails(Number(customPoints), activeGame?.rates ?? []).price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD (at ${getCustomPriceDetails(Number(customPoints), activeGame?.rates ?? []).rateUsed.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })} per point)
+                          Calculated Cost: $
+                          {getCustomPriceDetails(
+                            Number(customPoints),
+                            activeGame?.rates ?? [],
+                          ).price.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}{" "}
+                          USD (at $
+                          {getCustomPriceDetails(
+                            Number(customPoints),
+                            activeGame?.rates ?? [],
+                          ).rateUsed.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 4,
+                          })}{" "}
+                          per point)
                         </div>
                       )}
                     </div>
@@ -566,18 +597,14 @@ export default function BecomeDistributorPage() {
                     className="w-full bg-pink-500 hover:bg-pink-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-md shadow-pink-500/10 cursor-pointer hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-1.5"
                   >
                     <span>
-                      {isSubmitting
-                        ? "Submitting..."
-                        : "Become a Distributor / Agent"}
+                      {isSubmitting ? "Submitting..." : "Become a Distributor"}
                     </span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
                   {/* SDC Official Disclaimer - Exactly as screenshot */}
                   <div className="pt-2 border-t border-gray-100 mt-4 text-[10px] text-amber-600 font-extrabold leading-relaxed text-center">
-                    Disclaimer: USA Gaming Distributor is not an employer. We
-                    are not seeking employees. SDC is an account/credit
-                    supplier.
+                    Disclaimer: Will Contact you within 24 hours
                   </div>
                 </form>
               )}

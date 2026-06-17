@@ -359,7 +359,7 @@ export let GAME_PLATFORMS: GamePlatform[] = [
     imageUrl: "/images/game_milkyways.png",
     badge: "Popular",
     category: "Slots & Arcade",
-    levels: ["Sub-Distributor", "Store"],
+    levels: ["Sub-Distributor", "Distributor"],
     rates: [
       { points: "1,000", price: 160 },
       { points: "5,000", price: 750 },
@@ -407,7 +407,7 @@ export let GAME_PLATFORMS: GamePlatform[] = [
     imageUrl: "/images/game_juwa.png",
     badge: "New",
     category: "Multi-game Platform",
-    levels: ["Distributor", "Store"],
+    levels: ["Distributor", "Sub-Distributor"],
     rates: [
       { points: "1,000", price: 110 },
       { points: "5,000", price: 500 },
@@ -615,7 +615,7 @@ export let GAME_PLATFORMS: GamePlatform[] = [
     imageUrl: "/images/game_orionstars.png",
     badge: "Popular",
     category: "Classic Sweepstakes",
-    levels: ["Distributor", "Store"],
+    levels: ["Distributor", "Sub-Distributor"],
     rates: [
       { points: "1,000", price: 100 },
       { points: "5,000", price: 450 },

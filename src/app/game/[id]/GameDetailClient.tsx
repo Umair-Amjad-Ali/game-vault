@@ -81,7 +81,7 @@ export default function GameDetailClient() {
     communication: "WhatsApp",
     phone: "",
     email: "",
-    tier: "Store",
+    tier: "Sub-Distributor",
     gameId: id,
     points: "",
     message: "",
@@ -100,7 +100,12 @@ export default function GameDetailClient() {
       setFormData((prev) => ({
         ...prev,
         gameId: id,
-        points: prev.points === "custom" ? "custom" : (foundGame.rates[0] ? String(foundGame.rates[0].id ?? 1) : ""),
+        points:
+          prev.points === "custom"
+            ? "custom"
+            : foundGame.rates[0]
+              ? String(foundGame.rates[0].id ?? 1)
+              : "",
       }));
     }
   }, [id, games]);
@@ -120,7 +125,12 @@ export default function GameDetailClient() {
       setFormData((prev) => ({
         ...prev,
         gameId: selectedId,
-        points: prev.points === "custom" ? "custom" : (newGame.rates[0] ? String(newGame.rates[0].id ?? 1) : ""),
+        points:
+          prev.points === "custom"
+            ? "custom"
+            : newGame.rates[0]
+              ? String(newGame.rates[0].id ?? 1)
+              : "",
       }));
       // Route user smoothly to the new game url without page refresh to keep it pristine
       router.push(`/game/${selectedId}`);
@@ -132,7 +142,9 @@ export default function GameDetailClient() {
     if (!rates || rates.length === 0) {
       return { price: 0, rateUsed: 0, matchedIndex: 0 };
     }
-    const sorted = [...rates].sort((a, b) => Number(a.points) - Number(b.points));
+    const sorted = [...rates].sort(
+      (a, b) => Number(a.points) - Number(b.points),
+    );
     let matchedRate = sorted[0];
     let matchedIndex = 0;
     for (let i = 1; i < sorted.length; i++) {
@@ -141,12 +153,14 @@ export default function GameDetailClient() {
         matchedIndex = i;
       }
     }
-    const rateVal = matchedRate.amountPerPoint ?? (matchedRate.price / Number(matchedRate.points));
+    const rateVal =
+      matchedRate.amountPerPoint ??
+      matchedRate.price / Number(matchedRate.points);
     const calculatedPrice = enteredPoints * rateVal;
     return {
       price: calculatedPrice,
       rateUsed: rateVal,
-      matchedIndex
+      matchedIndex,
     };
   };
 
@@ -197,14 +211,21 @@ export default function GameDetailClient() {
 
     if (isCustom) {
       const enteredPoints = Number(customPoints);
-      const { price, rateUsed, matchedIndex } = getCustomPriceDetails(enteredPoints, game?.rates ?? []);
-      const matchedRate = (game?.rates ?? []).sort((a, b) => Number(a.points) - Number(b.points))[matchedIndex];
-      pointId = matchedRate?.id ?? (matchedIndex + 1);
+      const { price, rateUsed, matchedIndex } = getCustomPriceDetails(
+        enteredPoints,
+        game?.rates ?? [],
+      );
+      const matchedRate = (game?.rates ?? []).sort(
+        (a, b) => Number(a.points) - Number(b.points),
+      )[matchedIndex];
+      pointId = matchedRate?.id ?? matchedIndex + 1;
       finalPoints = String(enteredPoints);
       finalAmount = price.toFixed(2);
     } else {
       pointId = Number(formData.points);
-      const rate = game?.rates.find((r, index) => (r.id ?? index + 1) === pointId);
+      const rate = game?.rates.find(
+        (r, index) => (r.id ?? index + 1) === pointId,
+      );
       if (rate) {
         finalPoints = String(rate.points);
         finalAmount = String(rate.price);
@@ -259,7 +280,10 @@ export default function GameDetailClient() {
     return gradients[gameId] || "from-pink-500 via-pink-600 to-pink-700";
   };
 
-  const customPriceDetails = getCustomPriceDetails(Number(customPoints) || 0, game?.rates ?? []);
+  const customPriceDetails = getCustomPriceDetails(
+    Number(customPoints) || 0,
+    game?.rates ?? [],
+  );
 
   return (
     <div className="min-h-screen bg-white bg-grid-pattern pt-24 pb-16">
@@ -343,8 +367,8 @@ export default function GameDetailClient() {
                   Agent Setup Form
                 </h3>
                 <p className="text-xs text-gray-700 mt-1 leading-relaxed font-semibold">
-                  Register as an USA Gaming Distributor, sub-distributor, or
-                  store manager. Fill out the fields to receive portal setups.
+                  Register as an USA Gaming Distributor, Sub-distributor, Fill
+                  out the fields to receive portal setups.
                 </p>
               </div>
 
@@ -446,7 +470,7 @@ export default function GameDetailClient() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1.5">
                       <label className="text-xs font-extrabold text-gray-800">
-                        Store or Distributer{" "}
+                        Distributer and Sub-Distributor{" "}
                         <span className="text-pink-600">*</span>
                       </label>
                       <select
@@ -456,7 +480,6 @@ export default function GameDetailClient() {
                         }
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:border-pink-500 focus:bg-white transition-all cursor-pointer"
                       >
-                        <option value="Store">Store</option>
                         <option value="Sub-Distributor">Sub-Distributor</option>
                         <option value="Distributor">Distributor</option>
                       </select>
@@ -521,7 +544,20 @@ export default function GameDetailClient() {
                       />
                       {customPoints && Number(customPoints) > 0 && (
                         <div className="text-[11px] text-pink-600 font-extrabold mt-1">
-                          Calculated Cost: ${customPriceDetails.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT (at ${customPriceDetails.rateUsed.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 })} per point)
+                          Calculated Cost: $
+                          {customPriceDetails.price.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}{" "}
+                          USDT (at $
+                          {customPriceDetails.rateUsed.toLocaleString(
+                            undefined,
+                            {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 4,
+                            },
+                          )}{" "}
+                          per point)
                         </div>
                       )}
                     </div>
@@ -565,9 +601,7 @@ export default function GameDetailClient() {
 
                   {/* SDC Official Disclaimer - Exactly as screenshot */}
                   <div className="pt-2 border-t border-gray-100 mt-4 text-[10px] text-amber-600 font-extrabold leading-relaxed text-center">
-                    Disclaimer: USA Gaming Distributor is not an employer. We
-                    are not seeking employees. USA Gaming Distributor is an
-                    account/credit supplier.
+                    Disclaimer: Will Contact you within 24 hours
                   </div>
                 </form>
               )}
