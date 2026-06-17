@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_INFO } from "@/lib/constants";
 import { useApiData } from "@/components/providers/ApiDataProvider";
 import { submitForm } from "@/lib/api";
+import { parsePoints, handleNumberWithCommasChange } from "@/lib/utils";
 
 export default function BecomeDistributorPage() {
   const { games } = useApiData();
@@ -74,19 +75,19 @@ export default function BecomeDistributorPage() {
       return { price: 0, rateUsed: 0, matchedIndex: 0 };
     }
     const sorted = [...rates].sort(
-      (a, b) => Number(a.points) - Number(b.points),
+      (a, b) => parsePoints(String(a.points)) - parsePoints(String(b.points)),
     );
     let matchedRate = sorted[0];
     let matchedIndex = 0;
     for (let i = 1; i < sorted.length; i++) {
-      if (enteredPoints >= Number(sorted[i].points)) {
+      if (enteredPoints >= parsePoints(String(sorted[i].points))) {
         matchedRate = sorted[i];
         matchedIndex = i;
       }
     }
     const rateVal =
       matchedRate.amountPerPoint ??
-      matchedRate.price / Number(matchedRate.points);
+      matchedRate.price / parsePoints(String(matchedRate.points));
     const calculatedPrice = enteredPoints * rateVal;
     return {
       price: calculatedPrice,
@@ -110,7 +111,8 @@ export default function BecomeDistributorPage() {
     }
 
     const isCustom = formData.points === "custom";
-    if (isCustom && (!customPoints || Number(customPoints) <= 0)) {
+    const parsedCustomPoints = parsePoints(customPoints);
+    if (isCustom && parsedCustomPoints <= 0) {
       alert("Please enter a valid amount of points.");
       return;
     }
@@ -121,16 +123,16 @@ export default function BecomeDistributorPage() {
     let finalAmount = "";
 
     if (isCustom) {
-      const enteredPoints = Number(customPoints);
+      const enteredPoints = parsedCustomPoints;
       const { price, rateUsed, matchedIndex } = getCustomPriceDetails(
         enteredPoints,
         activeGame?.rates ?? [],
       );
       const matchedRate = (activeGame?.rates ?? []).sort(
-        (a, b) => Number(a.points) - Number(b.points),
+        (a, b) => parsePoints(String(a.points)) - parsePoints(String(b.points)),
       )[matchedIndex];
       pointId = matchedRate?.id ?? matchedIndex + 1;
-      finalPoints = String(enteredPoints);
+      finalPoints = String(enteredPoints).replace(/,/g, "");
       finalAmount = price.toFixed(2);
     } else {
       pointId = Number(formData.points);
@@ -138,8 +140,8 @@ export default function BecomeDistributorPage() {
         (r, index) => (r.id ?? index + 1) === pointId,
       );
       if (rate) {
-        finalPoints = String(rate.points);
-        finalAmount = String(rate.price);
+        finalPoints = String(rate.points).replace(/,/g, "");
+        finalAmount = String(rate.price).replace(/,/g, "");
       }
     }
 
@@ -338,7 +340,7 @@ export default function BecomeDistributorPage() {
                   Low Minimum Deposit
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-none mt-1">
-                  Start with ${getMinPrice()}
+                  Start with {getMinPrice()} USDT
                 </h3>
               </div>
               <span className="text-[10px] text-pink-100 font-semibold leading-normal mt-1 max-w-xs">
@@ -524,7 +526,7 @@ export default function BecomeDistributorPage() {
                             key={rate.id ?? index}
                             value={String(rate.id ?? index + 1)}
                           >
-                            {rate.points} points = ${rate.price} USD
+                            {rate.points} points = {rate.price} USDT
                           </option>
                         ))}
                       <option value="custom">Custom Points</option>
@@ -537,18 +539,17 @@ export default function BecomeDistributorPage() {
                         Custom Points <span className="text-pink-650">*</span>
                       </label>
                       <input
-                        type="number"
-                        min="1"
+                        type="text"
                         placeholder="Enter custom points amount"
                         value={customPoints}
-                        onChange={(e) => setCustomPoints(e.target.value)}
+                        onChange={(e) => handleNumberWithCommasChange(e, setCustomPoints)}
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:border-pink-500 focus:ring-4 focus:ring-pink-500/10 focus:bg-white transition-all"
                       />
-                      {customPoints && Number(customPoints) > 0 && (
+                      {customPoints && parsePoints(customPoints) > 0 && (
                         <div className="text-[11px] text-pink-600 font-extrabold mt-1">
                           Calculated Cost: $
                           {getCustomPriceDetails(
-                            Number(customPoints),
+                            parsePoints(customPoints),
                             activeGame?.rates ?? [],
                           ).price.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
@@ -556,7 +557,7 @@ export default function BecomeDistributorPage() {
                           })}{" "}
                           USD (at $
                           {getCustomPriceDetails(
-                            Number(customPoints),
+                            parsePoints(customPoints),
                             activeGame?.rates ?? [],
                           ).rateUsed.toLocaleString(undefined, {
                             minimumFractionDigits: 2,

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useApiData } from "@/components/providers/ApiDataProvider";
 import { submitForm } from "@/lib/api";
+import { parsePoints, handleNumberWithCommasChange } from "@/lib/utils";
 
 export default function GameDetailClient() {
   const params = useParams();
@@ -143,19 +144,19 @@ export default function GameDetailClient() {
       return { price: 0, rateUsed: 0, matchedIndex: 0 };
     }
     const sorted = [...rates].sort(
-      (a, b) => Number(a.points) - Number(b.points),
+      (a, b) => parsePoints(String(a.points)) - parsePoints(String(b.points)),
     );
     let matchedRate = sorted[0];
     let matchedIndex = 0;
     for (let i = 1; i < sorted.length; i++) {
-      if (enteredPoints >= Number(sorted[i].points)) {
+      if (enteredPoints >= parsePoints(String(sorted[i].points))) {
         matchedRate = sorted[i];
         matchedIndex = i;
       }
     }
     const rateVal =
       matchedRate.amountPerPoint ??
-      matchedRate.price / Number(matchedRate.points);
+      matchedRate.price / parsePoints(String(matchedRate.points));
     const calculatedPrice = enteredPoints * rateVal;
     return {
       price: calculatedPrice,
@@ -199,7 +200,8 @@ export default function GameDetailClient() {
     }
 
     const isCustom = formData.points === "custom";
-    if (isCustom && (!customPoints || Number(customPoints) <= 0)) {
+    const parsedCustomPoints = parsePoints(customPoints);
+    if (isCustom && parsedCustomPoints <= 0) {
       alert("Please enter a valid amount of points.");
       return;
     }
@@ -210,16 +212,16 @@ export default function GameDetailClient() {
     let finalAmount = "";
 
     if (isCustom) {
-      const enteredPoints = Number(customPoints);
+      const enteredPoints = parsedCustomPoints;
       const { price, rateUsed, matchedIndex } = getCustomPriceDetails(
         enteredPoints,
         game?.rates ?? [],
       );
       const matchedRate = (game?.rates ?? []).sort(
-        (a, b) => Number(a.points) - Number(b.points),
+        (a, b) => parsePoints(String(a.points)) - parsePoints(String(b.points)),
       )[matchedIndex];
       pointId = matchedRate?.id ?? matchedIndex + 1;
-      finalPoints = String(enteredPoints);
+      finalPoints = String(enteredPoints).replace(/,/g, "");
       finalAmount = price.toFixed(2);
     } else {
       pointId = Number(formData.points);
@@ -227,8 +229,8 @@ export default function GameDetailClient() {
         (r, index) => (r.id ?? index + 1) === pointId,
       );
       if (rate) {
-        finalPoints = String(rate.points);
-        finalAmount = String(rate.price);
+        finalPoints = String(rate.points).replace(/,/g, "");
+        finalAmount = String(rate.price).replace(/,/g, "");
       }
     }
 
@@ -281,7 +283,7 @@ export default function GameDetailClient() {
   };
 
   const customPriceDetails = getCustomPriceDetails(
-    Number(customPoints) || 0,
+    parsePoints(customPoints) || 0,
     game?.rates ?? [],
   );
 
@@ -522,7 +524,7 @@ export default function GameDetailClient() {
                           key={rate.id ?? index}
                           value={String(rate.id ?? index + 1)}
                         >
-                          {rate.points} points = ${rate.price} USDT
+                          {rate.points} points = {rate.price} USDT
                         </option>
                       ))}
                       <option value="custom">Custom Points</option>
@@ -535,21 +537,22 @@ export default function GameDetailClient() {
                         Custom Points <span className="text-pink-650">*</span>
                       </label>
                       <input
-                        type="number"
-                        min="1"
+                        type="text"
                         placeholder="Enter custom points amount"
                         value={customPoints}
-                        onChange={(e) => setCustomPoints(e.target.value)}
+                        onChange={(e) =>
+                          handleNumberWithCommasChange(e, setCustomPoints)
+                        }
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:border-pink-500 focus:bg-white transition-all"
                       />
-                      {customPoints && Number(customPoints) > 0 && (
+                      {customPoints && parsePoints(customPoints) > 0 && (
                         <div className="text-[11px] text-pink-600 font-extrabold mt-1">
-                          Calculated Cost: $
+                          Calculated Cost:
                           {customPriceDetails.price.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}{" "}
-                          USDT (at $
+                          USDT (at{" "}
                           {customPriceDetails.rateUsed.toLocaleString(
                             undefined,
                             {
@@ -557,7 +560,7 @@ export default function GameDetailClient() {
                               maximumFractionDigits: 4,
                             },
                           )}{" "}
-                          per point)
+                          USDT per point)
                         </div>
                       )}
                     </div>
@@ -695,7 +698,7 @@ export default function GameDetailClient() {
                       Starting from
                     </span>
                     <span className="text-xs font-black text-pink-650 group-hover:scale-105 transition-transform">
-                      ${rg.rates[0]?.price || 110} USDT
+                      {rg.rates[0]?.price || 110} USDT
                     </span>
                   </div>
                 </Link>
