@@ -603,7 +603,7 @@ export default function BecomeDistributorPage() {
                   </button>
 
                   {/* SDC Official Disclaimer - Exactly as screenshot */}
-                  <div className="pt-2 border-t border-gray-100 mt-4 text-[10px] text-amber-600 font-extrabold leading-relaxed text-center">
+                  <div className="pt-2 border-t border-gray-100 mt-4 text-[20px] text-amber-600 font-extrabold leading-relaxed text-center">
                     Disclaimer: Will Contact you within 24 hours
                   </div>
                 </form>
