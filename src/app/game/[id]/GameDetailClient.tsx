@@ -229,8 +229,8 @@ export default function GameDetailClient() {
         (r, index) => (r.id ?? index + 1) === pointId,
       );
       if (rate) {
-        finalPoints = String(rate.points).replace(/,/g, "");
-        finalAmount = String(rate.price).replace(/,/g, "");
+        finalPoints = String(rate.points_raw || rate.points).replace(/,/g, "");
+        finalAmount = String(rate.price_raw || rate.price).replace(/,/g, "");
       }
     }
 
@@ -293,7 +293,7 @@ export default function GameDetailClient() {
       <div className="absolute top-1/4 left-0 w-80 h-80 rounded-full bg-pink-100/30 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full bg-rose-50/50 blur-3xl pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Navigation Breadcrumb */}
         <Link
           href="/#game-platforms"
@@ -524,7 +524,7 @@ export default function GameDetailClient() {
                           key={rate.id ?? index}
                           value={String(rate.id ?? index + 1)}
                         >
-                          {rate.points} points = {rate.price} USDT
+                          {rate.points_string || rate.points} points = {rate.amount_string || rate.price} USDT
                         </option>
                       ))}
                       <option value="custom">Custom Points</option>
@@ -698,7 +698,7 @@ export default function GameDetailClient() {
                       Starting from
                     </span>
                     <span className="text-xs font-black text-pink-650 group-hover:scale-105 transition-transform">
-                      {rg.rates[0]?.price || 110} USDT
+                      {rg.rates[0]?.amount_string || rg.rates[0]?.price || "110.00"} USDT
                     </span>
                   </div>
                 </Link>

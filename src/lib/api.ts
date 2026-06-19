@@ -3,9 +3,11 @@ import type { GamePlatform, GameRate } from "@/lib/constants";
 export const baseUrl = "https://admin.usagamingdistributor.com";
 
 export interface ApiPointPackage {
-  points: number;
+  points: string;
   amount: string;
   amount_per_point: string;
+  amount_string?: string;
+  points_string?: string;
 }
 
 export interface ApiGame {
@@ -70,6 +72,10 @@ export const mapApiDataToPlatforms = (
       points: Number(item.points),
       price: Number(item.amount),
       amountPerPoint: Number(item.amount_per_point),
+      points_raw: item.points,
+      price_raw: item.amount,
+      points_string: item.points_string,
+      amount_string: item.amount_string,
     }));
 
     return {

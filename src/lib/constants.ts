@@ -48,6 +48,10 @@ export interface GameRate {
   points: string | number;
   price: number;
   amountPerPoint?: number;
+  points_raw?: string;
+  price_raw?: string;
+  points_string?: string;
+  amount_string?: string;
 }
 
 export interface GamePlatform {

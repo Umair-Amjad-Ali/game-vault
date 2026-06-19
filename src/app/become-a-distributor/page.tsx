@@ -64,9 +64,9 @@ export default function BecomeDistributorPage() {
   const getMinPrice = () => {
     if (activeGame && activeGame.rates.length > 0) {
       // Find the lowest rate price for this game
-      return activeGame.rates[0].price;
+      return activeGame.rates[0].amount_string || activeGame.rates[0].price;
     }
-    return 90; // Default fallback to absolute lowest package price in database
+    return "90.00"; // Default fallback to absolute lowest package price in database
   };
 
   // Helper for dynamic pricing calculations on custom points
@@ -140,8 +140,8 @@ export default function BecomeDistributorPage() {
         (r, index) => (r.id ?? index + 1) === pointId,
       );
       if (rate) {
-        finalPoints = String(rate.points).replace(/,/g, "");
-        finalAmount = String(rate.price).replace(/,/g, "");
+        finalPoints = String(rate.points_raw || rate.points).replace(/,/g, "");
+        finalAmount = String(rate.price_raw || rate.price).replace(/,/g, "");
       }
     }
 
@@ -526,7 +526,7 @@ export default function BecomeDistributorPage() {
                             key={rate.id ?? index}
                             value={String(rate.id ?? index + 1)}
                           >
-                            {rate.points} points = {rate.price} USDT
+                            {rate.points_string || rate.points} points = {rate.amount_string || rate.price} USDT
                           </option>
                         ))}
                       <option value="custom">Custom Points</option>
