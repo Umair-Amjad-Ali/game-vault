@@ -4,6 +4,7 @@ import { GAME_PLATFORMS } from "@/lib/constants";
 import { getAllData } from "@/lib/api";
 
 export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const staticIds = GAME_PLATFORMS.map((game) => ({ id: game.id }));
