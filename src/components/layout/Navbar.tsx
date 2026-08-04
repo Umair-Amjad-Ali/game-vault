@@ -60,8 +60,8 @@ export const Navbar: React.FC = () => {
             href="/"
             className="flex items-center gap-2 group focus:outline-none"
           >
-            <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-pink-500 to-pink-650 flex items-center justify-center text-white shadow-sm shadow-pink-500/25 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
-              <Gem className="w-4.5 h-4.5 animate-pulse-slow" />
+            <div className="w-12 h-12 rounded-xl shadow-sm shadow-pink-500/25 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300 overflow-hidden bg-white flex items-center justify-center">
+              <img src="/images/USA Gaming Distributor - Logo.jpg.jpeg" alt="USA Gaming Logo" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-gradient-pink leading-none">
@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
                   {games.map((game) => (
                     <Link
                       key={game.id}
-                      href={`/game/${game.id}`}
+                      href={`/game?id=${game.id}`}
                       onClick={() => setIsMegaOpen(false)}
                       className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-black text-gray-900 bg-gray-55 border border-gray-150/80 hover:bg-pink-600 hover:text-white hover:border-transparent hover:scale-[1.02] transition-all duration-200 group/item"
                     >
@@ -212,7 +212,7 @@ export const Navbar: React.FC = () => {
                 {games.map((game) => (
                   <Link
                     key={game.id}
-                    href={`/game/${game.id}`}
+                    href={`/game?id=${game.id}`}
                     onClick={() => {
                       setIsOpen(false);
                       setIsGamesOpen(false);

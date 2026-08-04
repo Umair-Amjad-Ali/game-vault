@@ -28,13 +28,8 @@ export const Footer: React.FC = () => {
             {/* Column 1: Brand presentation (4/12) */}
             <div className="col-span-1 lg:col-span-4 flex flex-col items-start gap-3">
               <Link href="/" className="flex items-center gap-2 group">
-                <div className="w-8 h-8 rounded-none bg-linear-to-tr from-pink-500 to-pink-650 flex items-center justify-center text-white shadow-sm shadow-pink-500/20 relative">
-                  {/* Unique L-shaped Crop Marks */}
-                  <span className="border-zinc-800 absolute -left-px -top-px block size-2.5 border-l-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
-                  <span className="border-zinc-800 absolute -right-px -top-px block size-2.5 border-r-2 border-t-2 z-20 transition-colors group-hover:border-pink-500"></span>
-                  <span className="border-zinc-800 absolute -bottom-px -left-px block size-2.5 border-b-2 border-l-2 z-20 transition-colors group-hover:border-pink-500"></span>
-                  <span className="border-zinc-800 absolute -bottom-px -right-px block size-2.5 border-b-2 border-r-2 z-20 transition-colors group-hover:border-pink-500"></span>
-                  <Gem className="w-4 h-4" />
+                <div className="w-12 h-12 rounded-xl shadow-sm shadow-pink-500/20 relative overflow-hidden bg-white flex items-center justify-center">
+                  <img src="/images/USA Gaming Distributor - Logo.jpg.jpeg" alt="USA Gaming Logo" className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col text-left">
                   <span className="text-base font-black tracking-tight text-gradient-pink leading-none">

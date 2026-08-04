@@ -226,7 +226,7 @@ export default function BecomeDistributorPage() {
             {games.map((g) => (
               <Link
                 key={g.id}
-                href={`/game/${g.id}`}
+                href={`/game?id=${g.id}`}
                 className="flex items-center gap-2.5 p-2.5 rounded-xl border border-pink-100/50 bg-pink-50/10 hover:bg-pink-50/30 hover:border-pink-300 hover:shadow-xs transition-all duration-300 group cursor-pointer"
               >
                 <div className="w-5 h-5 rounded-md bg-pink-500/10 flex items-center justify-center shrink-0 group-hover:bg-pink-500/20 transition-colors">

@@ -154,7 +154,7 @@ export const GamesGrid: React.FC<Props> = ({ games: gamesProp }) => {
 
                     {/* Action Setup Rates button */}
                     <Link
-                      href={`/game/${game.id}`}
+                      href={`/game?id=${game.id}`}
                       className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-650 text-white font-extrabold text-[10px] uppercase tracking-wider transition-all duration-300 shadow-md shadow-pink-500/10 cursor-pointer active:scale-98"
                     >
                       <span>View Rates & Setup</span>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -15,9 +15,9 @@ import { submitForm } from "@/lib/api";
 import { parsePoints, handleNumberWithCommasChange } from "@/lib/utils";
 
 export default function GameDetailClient() {
-  const params = useParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const id = params.id as string;
+  const id = searchParams.get("id") as string;
   const { games } = useApiData();
 
   // State to hold the current game details
@@ -134,7 +134,7 @@ export default function GameDetailClient() {
               : "",
       }));
       // Route user smoothly to the new game url without page refresh to keep it pristine
-      router.push(`/game/${selectedId}`);
+      router.push(`/game?id=${selectedId}`);
     }
   };
 
@@ -663,7 +663,7 @@ export default function GameDetailClient() {
               {relatedGames.map((rg) => (
                 <Link
                   key={rg.id}
-                  href={`/game/${rg.id}`}
+                  href={`/game?id=${rg.id}`}
                   className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 group relative flex flex-col justify-between p-6 rounded-none border border-zinc-200 bg-white hover:border-pink-400 hover:shadow-md hover:shadow-pink-500/5 hover:-translate-y-1 transition-all duration-300"
                 >
                   {/* Unique L-shaped Crop Marks */}
